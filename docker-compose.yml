@@ -1,0 +1,18 @@
+ version: '2'
+
+ services:
+   lists-ms:
+     build: .
+     command: python3 manage.py runserver 0.0.0.0:4004
+     ports:
+       - "4004:4004"
+     depends_on:
+       - lists-db
+   lists-db:
+     image: postgres
+     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lists-db
+     ports:
+       - "5434:5432"

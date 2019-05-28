@@ -1,0 +1,346 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservicio para listas
+  description: Python + PostgreSQL
+  license:
+    name: Software Architecture 2019-I
+host: 192.168.99.101:4004
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /lists-ms/list/{id}:
+    get:
+      summary: Retorna la lista segun el id
+      operationId: list_get
+      parameters:
+        - name: id
+          in: path
+          description: El id de la lista
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/list'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualiza los campos de una lista
+      operationId: list_put
+      parameters:
+        - name: id
+          in: path
+          description: El id de la lista
+          required: true
+          type: integer
+        - name: list
+          in: body
+          required: True
+          description: Los campos de la lista
+          schema:
+            $ref: '#/definitions/list'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/list'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Borra una lista
+      operationId: list_delete
+      parameters:
+        - name: id
+          in: path
+          description: El id de la lista
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No content
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /lists-ms/list:
+    post:
+        summary: Crea una lista
+        operationId: list_post
+        parameters:
+          - name: list
+            in: body
+            required: True
+            description: Los campos de la lista
+            schema:
+              $ref: '#/definitions/list'
+        responses:
+          '201':
+            description: Created
+            schema:
+              $ref: '#/definitions/list'
+          '400':
+            description: Bad request
+            schema:
+              $ref: '#/definitions/ErrorModel'
+          '500':
+            description: Internal Server Error
+            schema:
+              $ref: '#/definitions/ErrorModel'
+  /lists-ms/place/{id}:
+    get:
+      summary: Retorna las coordenadas del lugar segun el id
+      operationId: place_get
+      parameters:
+        - name: id
+          in: path
+          description: El id del lugar
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/place'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualiza los campos de un lugar
+      operationId: place_put
+      parameters:
+        - name: id
+          in: path
+          description: El id del lugar
+          required: true
+          type: integer
+        - name: list
+          in: body
+          required: True
+          description: Los campos del lugar
+          schema:
+            $ref: '#/definitions/place'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/place'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Borra un lugar
+      operationId: place_delete
+      parameters:
+        - name: id
+          in: path
+          description: El id del lugar
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No content
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /lists-ms/place:
+    post:
+        summary: Añadir un lugar a una lista
+        operationId: place_post
+        parameters:
+          - name: place
+            in: body
+            required: True
+            description: Los campos de la lista
+            schema:
+              $ref: '#/definitions/place'
+        responses:
+          '201':
+            description: Created
+            schema:
+              $ref: '#/definitions/place'
+          '400':
+            description: Bad request
+            schema:
+              $ref: '#/definitions/ErrorModel'
+          '500':
+            description: Internal Server Error
+            schema:
+              $ref: '#/definitions/ErrorModel'
+  /lists-ms/lists/{id}:
+    get:
+      summary: Retorna las Lista de listas segun el id de usuario
+      operationId: lists_by_user
+      parameters:
+        - name: id
+          in: path
+          description: El id del usuario
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/lists'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /lists-ms/list_all/{id}:
+    get:
+      summary: Retorna una lista, incluyendo los datos del object list, con todos los lugares a visitar
+      operationId: list_with_places_by_list
+      parameters:
+        - name: id
+          in: path
+          description: El id de la lista
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/list_places'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /lists-ms/places/{id}:
+    get:
+      summary: Retorna una lista, con todos los lugares a visitar
+      operationId: places_by_list
+      parameters:
+        - name: id
+          in: path
+          description: El id de la alista
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/places'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  
+
+
+definitions:
+
+  list:
+    type: object
+    properties:
+      id:
+        type: integer
+      id_user:
+        type: integer
+      name:
+        type: string
+      comment:
+        type: string
+      estimatedDate:
+        type: string
+        format: date
+      order:
+        type: integer
+        
+  place:
+    type: object
+    properties:
+      id:
+        type: integer
+      id_list:
+        type: integer
+      placeLon:
+        type: number
+      placeLat:
+        type: number
+        
+  lists:
+    type: object
+    required:
+      - id_ser
+    properties:
+      lists:
+        type: array
+        items:
+          $ref: '#/definitions/list'
+          
+  list_places:
+    type: object
+    properties:
+      list:
+        $ref: '#/definitions/list'
+      places:
+        type: array
+        items:
+          $ref: '#/definitions/place'
+
+  places:
+      type: object
+      properties:
+        places:
+          type: array
+          items:
+            $ref: '#/definitions/place'
+
+# Errors
+  ErrorModel:
+    type: object
+    required:
+      - message
+      - code
+    properties:
+      message:
+        type: string
+      code:
+        type: number
+      description:
+        type: object
