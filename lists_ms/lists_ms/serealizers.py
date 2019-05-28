@@ -32,4 +32,4 @@ class ListWhitPlacesSerializer(serializers.ModelSerializer):
     places = PlaceSerializer(many=True, read_only=True)
     class Meta:
         model = List
-        fields = ('id','id_list','name', 'comment', 'estimatedDate', 'order', 'places')
+        fields = ('id','id_user','name', 'comment', 'estimatedDate', 'order', 'places')
