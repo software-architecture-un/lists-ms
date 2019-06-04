@@ -3,7 +3,7 @@
  services:
    lists-ms:
      build: .
-     command: bash -c "python3 manage.py migrate && python3 manage.py makemigrations && python3 manage.py runserver 0.0.0.0:4004"
+     command: bash -c "sleep 40 && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:4004"
      ports:
        - "4004:4004"
      depends_on:
