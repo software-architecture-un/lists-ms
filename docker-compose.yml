@@ -3,16 +3,16 @@
  services:
    lists-ms:
      build: .
-     command: python3 manage.py runserver 0.0.0.0:4004
+     command: bash -c "python3 manage.py migrate && python3 manage.py makemigrations && python3 manage.py runserver 0.0.0.0:4004"
      ports:
        - "4004:4004"
      depends_on:
-       - lists-db
-   lists-db:
+       - db
+   db:
      image: postgres
      environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: lists-db
+      POSTGRES_DB: db
      ports:
-       - "5434:5432"
+       - "5432:5432"

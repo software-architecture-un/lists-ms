@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'lists_ms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'lists-db',
+        'NAME': 'db',
         'USER': 'postgres',
         # 'HOST': 'localhost',
-        'HOST': 'lists-db',
+        'HOST': 'db',
         # 'PASSWORD':'secret',
         'PASSWORD':'postgres',
         'PORT': 5432
