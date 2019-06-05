@@ -13,23 +13,12 @@ class ListSerializer(serializers.ModelSerializer):
 
 
 class PlaceSerializer(serializers.ModelSerializer):
-    # id = serializers.IntegerField(read_only=True)
-    # id_list = serializers.IntegerField(read_only=True)
-    # placeLon = serializers.FloatField(required=False)
-    # placeLat = serializers.FloatField(required=False)
-
-    # def update(self, instance, validated_data):
-    #     instance.placeLat = validated_data.get('placeLat', instance.placeLat)
-    #     instance.placeLon = validated_data.get('placeLon', instance.placeLon)
-    #     instance.save()
-    #     return instance
-
     class Meta:
         model = ListPlace
-        fields = ('placeLat','placeLon','id_list', 'id')
+        fields = '__all__'
 
 class ListWhitPlacesSerializer(serializers.ModelSerializer):
     places = PlaceSerializer(many=True, read_only=True)
     class Meta:
         model = List
-        fields = ('id','id_user','name', 'comment', 'estimatedDate', 'order', 'places')
+        fields = ('id','id_user','name', 'comment', 'estimatedDate', 'places')

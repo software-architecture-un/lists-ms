@@ -97,10 +97,3 @@ def buildResponse(data, message):
         response['content'] = data
     return response
 
-
-   
-
-# class ListViewSet(viewsets.ModelViewSet):
-#     queryset = List.objects.all()
-#     serializer_class = ListSerializer
-

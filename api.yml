@@ -288,9 +288,7 @@ definitions:
       estimatedDate:
         type: string
         format: date
-      order:
-        type: integer
-        
+
   place:
     type: object
     properties:
@@ -298,10 +296,9 @@ definitions:
         type: integer
       id_list:
         type: integer
-      placeLon:
-        type: number
-      placeLat:
-        type: number
+      id_place:
+        type: integer
+  
         
   lists:
     type: object
@@ -330,6 +327,7 @@ definitions:
           type: array
           items:
             $ref: '#/definitions/place'
+
 
 # Errors
   ErrorModel:
