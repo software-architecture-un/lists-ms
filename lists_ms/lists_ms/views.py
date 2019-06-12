@@ -45,7 +45,7 @@ def place(request,pk):
             return Response(response)
         return Response(buildResponse(None,serializer.errors), status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
-        place.first().delete()
+        place.delete()
         return Response(buildResponse(None,'Place was delete'),status=status.HTTP_204_NO_CONTENT)
 
 
@@ -78,7 +78,7 @@ def lists(request,pk):
             return Response(response)
         return Response(buildResponse(None,serializer.errors), status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
-        listObj.first().delete()
+        listObj.delete()
         return Response(buildResponse(None,'List was delete'),status=status.HTTP_204_NO_CONTENT)
 
 
